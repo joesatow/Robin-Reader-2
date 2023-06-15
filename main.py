@@ -6,3 +6,5 @@ accountActivityList = getData()
 
 # Filter data
 accountActivityList = filterData(accountActivityList)
+
+print()
