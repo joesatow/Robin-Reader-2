@@ -9,10 +9,10 @@ def getData():
     result = glob.glob('*.{}'.format(extension))
     activityFile = result[0]
 
-    file = open(activityFile, "r")
-    data = list(csv.reader(file, delimiter=','))
-    file.close()
+    with open(activityFile) as f:
+        reader = csv.DictReader(f)
+        data = list(reader)
 
     # Return everything but first row and last 2 rows
     # First row is headers, last two rows are robinhood text, not data we want 
-    return data[1:-2] 
+    return data[0:-2] 

@@ -5,6 +5,7 @@ def filterData(list):
 # function for use in filtering accountActivityList.
 # get rid of anything that isnt BTO or STC or OEXP
 def determine(str):
-    transactionCode = str[5] # 5 = Trans Code
+    transactionCode = str['Trans Code']
     if transactionCode != 'BTO' and transactionCode != 'STC' and transactionCode != 'OEXP':
         return True
+
