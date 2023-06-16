@@ -18,7 +18,4 @@ accountActivityList = filterData(accountActivityList)
 for line in accountActivityList:
     transactionCode = line['Trans Code']
 
-    
-    fixAmount(line['Amount'])
-
 print()
