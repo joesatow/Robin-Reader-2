@@ -26,6 +26,8 @@ for line in accountActivityList:
   contractDict[description]['currentQuantity'] += quantity # add quantity.  since there's both positive (buys) and negative (sells) values, it'll eventually zero out (trade is done).
   contractDict[description]['cons'] = max(contractDict[description]['cons'], abs(contractDict[description]['currentQuantity']))
   contractDict[description]['net'] += amount
+  if transactionCode == 'OEXP':
+    contractDict[description]['letExpire'] = True
 
   if contractDict[description]['currentQuantity'] == 0:
     pass

@@ -18,7 +18,6 @@ def getUniqueVals(transCode, line):
         ticker = description.split(' ')[0]
         quantity = -int(line['Quantity'].replace('S','')) # quantity here is how many contracts expired.  
         amount = 0 # 0 because the option expired worthless, equivalent to selling for 0 dollars.
-        letExpire = True
     else: # standard BTO or STC line
         description = line['Description']
         quantity = int(line['Quantity'])
@@ -26,7 +25,6 @@ def getUniqueVals(transCode, line):
             quantity = -quantity
         amount = fixAmount(line['Amount'])
         ticker = line['Instrument']
-        letExpire = False
 
     return {
         "description": description, 

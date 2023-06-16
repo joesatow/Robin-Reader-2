@@ -10,5 +10,5 @@ def createNewDictEntry(line):
             'net': 0,
             'startDate': '',
             'endDate': line['Process Date'],
-            'letExpire': ''
+            'letExpire': False
         }
