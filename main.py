@@ -14,16 +14,20 @@ accountActivityList = filterData(accountActivityList)
 contractDict = {}
 
 for line in accountActivityList:
-    transactionCode = line['Trans Code']
 
-    description, ticker, quantity, amount = getUniqueVals(transactionCode, line).values()
-    
-    if description not in contractDict:
-        contractDict[description] = createNewDictEntry(line)
+  transactionCode = line['Trans Code']
 
-    contractDict[description]['ticker'] = ticker
-    contractDict[description]['currentQuantity'] += quantity # add quantity.  since there's both positive (buys) and negative (sells) values, it'll eventually zero out (trade is done).
-    contractDict[description]['cons'] = max(contractDict[description]['cons'], abs(contractDict[description]['currentQuantity']))
-    contractDict[description]['net'] += amount
-    
-    print()
+  description, ticker, quantity, amount = getUniqueVals(transactionCode, line).values()
+
+  if description not in contractDict:
+    contractDict[description] = createNewDictEntry(line)
+
+  contractDict[description]['ticker'] = ticker
+  contractDict[description]['currentQuantity'] += quantity # add quantity.  since there's both positive (buys) and negative (sells) values, it'll eventually zero out (trade is done).
+  contractDict[description]['cons'] = max(contractDict[description]['cons'], abs(contractDict[description]['currentQuantity']))
+  contractDict[description]['net'] += amount
+
+  if contractDict[description]['currentQuantity'] == 0:
+    pass
+
+print()
