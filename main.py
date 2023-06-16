@@ -16,6 +16,9 @@ accountActivityList = filterData(accountActivityList)
 
 # Fix amounts
 for line in accountActivityList:
-    fixAmount()
+    transactionCode = line['Trans Code']
+
+    
+    fixAmount(line['Amount'])
 
 print()
