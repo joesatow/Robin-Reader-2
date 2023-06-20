@@ -32,3 +32,16 @@ def getUniqueVals(transCode, line):
         "quantity": quantity, 
         "amount": amount
     }
+
+def getAverages(buySum,sellSum, cons):
+    averageBuy = abs(round((buySum / cons)/100, 2))
+    averageSell = abs(round((sellSum / cons)/100, 2))
+    if averageSell == 0:
+        pctChange = -1
+    else:
+        pctChange = -round(((averageBuy - averageSell) / averageBuy), 4)
+    return {
+        "averageBuy": averageBuy,
+        "averageSell": averageSell,
+        "pctChange": pctChange
+    }

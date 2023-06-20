@@ -1,6 +1,6 @@
 from helper_funcs.fileFunctions import getData
 from helper_funcs.filter import filterData
-from helper_funcs.dataFunctions import getUniqueVals
+from helper_funcs.dataFunctions import getUniqueVals, getAverages
 from helper_funcs.contractDictFunctions import createNewDictEntry
     
 # Get account activity list
@@ -22,14 +22,22 @@ for line in accountActivityList:
   if description not in contractDict:
     contractDict[description] = createNewDictEntry(line)
 
-  contractDict[description]['ticker'] = ticker
-  contractDict[description]['currentQuantity'] += quantity # add quantity.  since there's both positive (buys) and negative (sells) values, it'll eventually zero out (trade is done).
-  contractDict[description]['cons'] = max(contractDict[description]['cons'], abs(contractDict[description]['currentQuantity']))
-  contractDict[description]['net'] += amount
+  currentContract = contractDict[description]
+  currentContract['ticker'] = ticker
+  currentContract['currentQuantity'] += quantity # add quantity.  since there's both positive (buys) and negative (sells) values, it'll eventually zero out (trade is done).
+  currentContract['cons'] = max(currentContract['cons'], abs(currentContract['currentQuantity']))
+  currentContract['net'] += amount
+  
   if transactionCode == 'OEXP':
-    contractDict[description]['letExpire'] = True
+    currentContract['letExpire'] = True
 
-  if contractDict[description]['currentQuantity'] == 0:
-    pass
+  if transactionCode == 'BTO':
+      currentContract['buySum'] += amount
+  elif transactionCode == 'STC': # STC or OEXP
+      currentContract['sellSum'] += amount
+
+  if currentContract['currentQuantity'] == 0:
+    averageBuy, averageSell, pctChange = getAverages(currentContract['buySum'], currentContract['sellSum'], currentContract['cons']).values()
+    print()
 
 print()
