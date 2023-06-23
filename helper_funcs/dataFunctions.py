@@ -28,7 +28,6 @@ def getUniqueVals(transCode, line):
 
     return {
         "description": description, 
-        "ticker": ticker,
         "quantity": quantity, 
         "amount": amount
     }

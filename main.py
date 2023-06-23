@@ -17,20 +17,18 @@ for line in accountActivityList:
 
   transactionCode = line['Trans Code']
 
-  description, ticker, quantity, amount = getUniqueVals(transactionCode, line).values()
+  description, quantity, amount = getUniqueVals(transactionCode, line).values()
 
   if description not in contractDict:
     contractDict[description] = createNewDictEntry(line)
 
   currentContract = contractDict[description]
-  currentContract['ticker'] = ticker
   currentContract['currentQuantity'] += quantity # add quantity.  since there's both positive (buys) and negative (sells) values, it'll eventually zero out (trade is done).
   currentContract['cons'] = max(currentContract['cons'], abs(currentContract['currentQuantity']))
   currentContract['net'] += amount
   
   if transactionCode == 'OEXP':
-    currentContract['letExpire'] = True
-
+      currentContract['letExpire'] = True
   if transactionCode == 'BTO':
       currentContract['buySum'] += amount
   elif transactionCode == 'STC': # STC or OEXP
