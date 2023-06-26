@@ -4,24 +4,24 @@ def getContractDictUpdate(currentContract, line):
     currentContract = contractDict[description]
     transactionCode = line['Trans Code']
 
-    currentContract['currentQuantity'] += quantity # add quantity.  since there's both positive (buys) and negative (sells) values, it'll eventually zero out (trade is done).
-    currentContract['cons'] = max(currentContract['cons'], abs(currentContract['currentQuantity']))
-    currentContract['net'] += amount
+    newQuantity = currentContract['currentQuantity'] + getCurrentValue(1, line) # add quantity.  since there's both positive (buys) and negative (sells) values, it'll eventually zero out (trade is done).
+    newContractCount = max(currentContract['cons'], abs(currentContract['currentQuantity']))
 
-    currentQuantity = getCurrentValue(1, line)
-    currentAmount = getCurrentValue(2, line)
+    amount = getCurrentValue(2, line)
+    newNet = currentContract['net'] + amount
     
     if transactionCode == 'OEXP':
         currentContract['letExpire'] = True
     if transactionCode == 'BTO':
-        currentContract['buySum'] += amount
+        currentContract['buySum'] += amount  ###### Fix all these to go in the update object
     elif transactionCode == 'STC': # STC or OEXP
         currentContract['sellSum'] += amount
     
-    return {
+    updateObject = {
         description: {
-            'currentQuantity': currentQuantity,
-            'cons': max(c)
+            'currentQuantity': newQuantity,
+            'cons': newContractCount,
+            'net': newNet
         }
     }
 

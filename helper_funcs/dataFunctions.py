@@ -25,7 +25,7 @@ def getCurrentValue(value, line):
         if value == 1:
             return -int(line['Quantity'].replace('S','')) # quantity here is how many contracts expired.
         if value == 2:
-            return  0
+            return  0 # 0 because the option expired worthless, equivalent to selling for 0 dollars.
     else: # standard BTO or STC line
         if value == 0:
             return line['Description']
