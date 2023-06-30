@@ -37,7 +37,11 @@ def getCurrentValue(value, line):
         if value == 2:
             return fixAmount(line['Amount'])
 
-def getAverages(buySum,sellSum, cons):
+def getAverages(currentContract):
+    buySum = currentContract['buySum']
+    sellSum = currentContract['sellSum']
+    cons = currentContract['cons']
+    
     averageBuy = abs(round((buySum / cons)/100, 2))
     averageSell = abs(round((sellSum / cons)/100, 2))
     if averageSell == 0:
