@@ -30,7 +30,10 @@ def getCurrentValue(value, line):
         if value == 0:
             return line['Description']
         if value == 1:
-            return int(line['Quantity'])
+            if transCode == 'BTO':
+                return int(line['Quantity'])
+            else:
+                return -int(line['Quantity']) 
         if value == 2:
             return fixAmount(line['Amount'])
 

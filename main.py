@@ -25,6 +25,9 @@ for line in accountActivityList:
 
   if currentContract['currentQuantity'] == 0:
     averageBuy, averageSell, pctChange = getAverages(currentContract['buySum'], currentContract['sellSum'], currentContract['cons']).values()
-    print()
+    if currentContract['letExpire'] == True:
+      print()
+    del contractDict[description]
+
 
 print()
