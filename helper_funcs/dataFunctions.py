@@ -17,7 +17,7 @@ def fixAmount(str):
 # 1 = quantity
 # 2 = amount
 def getCurrentValue(value, line):
-    transCode = line['transCode']
+    transCode = line['Trans Code']
 
     if transCode == 'OEXP':
         if value == 0:

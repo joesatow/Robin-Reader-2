@@ -21,7 +21,7 @@ for line in accountActivityList:
     contractDict[description] = createNewDictEntry(line)
 
   currentContract = contractDict[description]
-  contractDict.update(getContractDictUpdate(currentContract, line))
+  contractDict[description].update(getContractDictUpdate(currentContract, line))
 
   if currentContract['currentQuantity'] == 0:
     averageBuy, averageSell, pctChange = getAverages(currentContract['buySum'], currentContract['sellSum'], currentContract['cons']).values()
