@@ -4,6 +4,7 @@ from helper_funcs.dataFunctions import getCurrentValue
 from helper_funcs.contractDictFunctions import createNewDictEntry
 from helper_funcs.contractDictUpdate import getContractDictUpdate
 from helper_funcs.tradeListFunctions import getTradeDictUpdate
+from helper_funcs.outputFunctions import writeCSV
      
 # Get account activity list
 accountActivityList = getData()
@@ -28,8 +29,7 @@ for line in accountActivityList:
   contractDict[description].update(getContractDictUpdate(currentContract, line))
 
   if currentContract['currentQuantity'] == 0:
-    tradeList.append(getTradeDictUpdate(currentContract, line['Process Date'])) # use process date to get buy date
+    tradeList.append(getTradeDictUpdate(currentContract, description, line['Process Date'])) # use process date to get buy date
     del contractDict[description]
 
-
-print()
+writeCSV(tradeList)

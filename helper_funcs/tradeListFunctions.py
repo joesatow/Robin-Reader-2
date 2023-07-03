@@ -1,7 +1,7 @@
 from .dataFunctions import getAverages
 import datetime
 
-def getTradeDictUpdate(currentContract, lineBuyDate):
+def getTradeDictUpdate(currentContract, description, lineBuyDate):
     averageBuy, averageSell, pctChange = getAverages(currentContract).values() # get averages of final trade info
     
     buyDate = lineBuyDate
@@ -22,6 +22,7 @@ def getTradeDictUpdate(currentContract, lineBuyDate):
 
     return {
         "ticker": ticker,
+        "contractDescription": description,
         "averageBuy": averageBuy,
         "totalBuy": averageBuy * cons * 100,
         "averageSell": averageSell,
@@ -30,7 +31,7 @@ def getTradeDictUpdate(currentContract, lineBuyDate):
         "net": net,
         "contracts": cons,
         "buyDate": buyDate,
-        "buyDateOfWeek": buyDateDayOfWeek,
+        "buyDateDayOfWeek": buyDateDayOfWeek,
         "sellDate": sellDate,
         "sellDateDayOfWeek": sellDateDayOfWeek,
         "daysHeld": daysHeld,
