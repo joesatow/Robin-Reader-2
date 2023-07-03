@@ -6,6 +6,6 @@ def createNewDictEntry(line):
             'buySum': 0,
             'sellSum': 0,
             'net': 0,
-            'endDate': line['Process Date'],
+            'sellDate': line['Process Date'],
             'letExpire': False
         }

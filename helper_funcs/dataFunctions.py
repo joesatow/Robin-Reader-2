@@ -42,8 +42,8 @@ def getAverages(currentContract):
     sellSum = currentContract['sellSum']
     cons = currentContract['cons']
     
-    averageBuy = abs(round((buySum / cons)/100, 2))
-    averageSell = abs(round((sellSum / cons)/100, 2))
+    averageBuy = abs(round((buySum / cons)/100, 4))
+    averageSell = abs(round((sellSum / cons)/100, 4))
     if averageSell == 0:
         pctChange = -1
     else:

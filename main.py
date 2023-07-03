@@ -3,7 +3,7 @@ from helper_funcs.filter import filterData
 from helper_funcs.dataFunctions import getCurrentValue
 from helper_funcs.contractDictFunctions import createNewDictEntry
 from helper_funcs.contractDictUpdate import getContractDictUpdate
-from helper_funcs.tradeDictFunctions import getTradeDictUpdate
+from helper_funcs.tradeListFunctions import getTradeDictUpdate
      
 # Get account activity list
 accountActivityList = getData()
@@ -15,8 +15,8 @@ accountActivityList = filterData(accountActivityList)
 # using a dictionary is a good way to track because sometimes you open multiple options at once.
 contractDict = {}
 
-# trade dictionary to keep track of closed trades
-tradeDict = {}
+# trade List to keep track of closed trades
+tradeList = []
 
 for line in accountActivityList:
   description = getCurrentValue(0, line)
@@ -28,7 +28,7 @@ for line in accountActivityList:
   contractDict[description].update(getContractDictUpdate(currentContract, line))
 
   if currentContract['currentQuantity'] == 0:
-    tradeDict.update(getTradeDictUpdate(currentContract))
+    tradeList.append(getTradeDictUpdate(currentContract, line['Process Date'])) # use process date to get buy date
     del contractDict[description]
 
 
