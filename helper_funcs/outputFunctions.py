@@ -1,15 +1,17 @@
-import csv
-
-# field names for CSV output file
-fields = ['ticker', 'contractDescription', 'contracts', 'averageBuy', 'totalBuy', 'averageSell', 'totalSell', 'pctChange', 'net', 'buyDate', 'buyDateDayOfWeek', 'sellDate', 'sellDateDayOfWeek', 'daysHeld', 'letExpire'] 
-
-# output path
-path = 'output.csv'
+# import csv
+# import openpyxl as px
+import pandas as pd
+import openpyxl as px
 
 def writeCSV(tradeList):
-    with open(path, 'w', newline='') as file: 
-        writer = csv.writer(file)
-        writer.writerow(['Ticker', 'Description', 'Contracts', 'Average Buy', 'Total Buy', 'Average Sell', 'Total Sell', 'Percent Change', 'Net', 'Buy Date', 'Day', 'Sell Date', 'Day', 'Days Held', 'Let Expire?'])
+    df = pd.DataFrame(tradeList)
+    writer = pd.ExcelWriter('output.xlsx', engine='xlsxwriter')
+    df.to_excel(writer, sheet_name='welcome', index=False)
+    writer.close()
 
-        writer = csv.DictWriter(file, fieldnames = fields)
-        writer.writerows(tradeList)
+    wb = px.load_workbook('output.xlsx')
+    ws = wb.active
+
+    ws.auto_filter.ref = ws.dimensions
+
+    wb.save('output.xlsx')
