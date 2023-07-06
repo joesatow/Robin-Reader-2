@@ -26,6 +26,7 @@ for line in accountActivityList:
     contractDict[description] = createNewDictEntry(line)
 
   currentContract = contractDict[description]
+
   contractDict[description].update(getContractDictUpdate(currentContract, line))
 
   if currentContract['currentQuantity'] == 0:

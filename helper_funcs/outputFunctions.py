@@ -11,13 +11,13 @@ def writeCSV(tradeList):
     df.columns.values[0:15] = [
         "Ticker",
         "Contract Description",
+        "# Cons",
         "Avg Buy",
         "Total Buy",
         "Avg Sell",
         "Total Sell",
         "% Change",
         "Net Change",
-        "# Cons",
         "Buy Date",
         "Buy DoW",
         "Sell Date",
@@ -52,26 +52,26 @@ def writeCSV(tradeList):
 
     # Style the '% Change' column with percent format
     number_format = '0.00%'
-    for cell in ws['G']:
+    for cell in ws['H']:
         cell.number_format = number_format
 
     # Style the buys/sells columns with currency($) formats
     number_format = '_($* #,##0.00_);_($* (#,##0.00);_($* "-"??_);_(@_)'
-    for cell in ws['C']:
-        cell.number_format = number_format
-    
     for cell in ws['D']:
         cell.number_format = number_format
-
+    
     for cell in ws['E']:
         cell.number_format = number_format
 
     for cell in ws['F']:
         cell.number_format = number_format
 
+    for cell in ws['G']:
+        cell.number_format = number_format
+
     # Style the net column with currency format that shows red for negative values
     number_format = '$#,##0.00_);[Red]($#,##0.00)'
-    for cell in ws['H']:
+    for cell in ws['I']:
         cell.number_format = number_format
 
     ws.add_table(tab)

@@ -5,7 +5,7 @@ def fixAmount(str):
         amount = amount.replace('(','').replace(')','')
         amount = float(amount)
         amount = -amount
-    amount = float(amount)
+    amount = round(float(amount),0)
     return amount
 
 
