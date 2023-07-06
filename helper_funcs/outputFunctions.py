@@ -1,5 +1,3 @@
-# import csv
-# import openpyxl as px
 import pandas as pd
 import openpyxl as px
 from openpyxl.worksheet.table import Table, TableStyleInfo
