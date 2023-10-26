@@ -24,9 +24,6 @@ for line in accountActivityList:
   # we need to grab it with getCurrentValue() because broker reports have different descriptions for expiration/buy/sell
   description = getCurrentValue(0, line)
 
-  if 'AUG 23 CALL 700' in line["Ticker"]:
-    print("peen")
-
   if description not in contractDict:
     contractDict[description] = createNewDictEntry(line)
 

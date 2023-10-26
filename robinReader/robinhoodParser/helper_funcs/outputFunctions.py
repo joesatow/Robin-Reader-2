@@ -2,6 +2,7 @@ import pandas as pd
 import openpyxl as px
 from openpyxl.worksheet.table import Table, TableStyleInfo
 
+PATH = '/mnt/share/output-robin.xlsx'
 def writeCSV(tradeList):
     df = pd.DataFrame(tradeList)
     
@@ -24,11 +25,11 @@ def writeCSV(tradeList):
         "Let Exp?"
     ]
 
-    writer = pd.ExcelWriter('output.xlsx', engine='xlsxwriter')
+    writer = pd.ExcelWriter(PATH, engine='xlsxwriter')
     df.to_excel(writer, sheet_name='welcome', index=False)
     writer.close()
 
-    wb = px.load_workbook('output.xlsx')
+    wb = px.load_workbook(PATH)
     ws = wb.active
 
     tab = Table(displayName="Table1", ref=ws.dimensions)
@@ -73,4 +74,4 @@ def writeCSV(tradeList):
         cell.number_format = number_format
 
     ws.add_table(tab)
-    wb.save('output.xlsx')
+    wb.save(PATH)
