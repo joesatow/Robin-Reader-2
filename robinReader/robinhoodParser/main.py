@@ -1,10 +1,10 @@
-from helper_funcs.fileFunctions import getData
-from helper_funcs.filter import filterData
-from helper_funcs.dataFunctions import getCurrentValue
-from helper_funcs.contractDictFunctions import createNewDictEntry
-from helper_funcs.contractDictUpdate import getContractDictUpdate
-from helper_funcs.tradeListFunctions import getTradeDictUpdate
-from helper_funcs.outputFunctions import writeCSV
+from robinReader.robinReader.chaseParser.helper_funcs.fileFunctions import getData
+from robinReader.robinReader.chaseParser.helper_funcs.filter import filterData
+from robinReader.robinReader.chaseParser.helper_funcs.dataFunctions import getCurrentValue
+from robinReader.robinReader.chaseParser.helper_funcs.contractDictFunctions import createNewDictEntry
+from robinReader.robinReader.chaseParser.helper_funcs.contractDictUpdate import getContractDictUpdate
+from robinReader.robinReader.chaseParser.helper_funcs.tradeListFunctions import getTradeDictUpdate
+from robinReader.robinReader.chaseParser.helper_funcs.outputFunctions import writeCSV
      
 # Get account activity list
 accountActivityList = getData()
